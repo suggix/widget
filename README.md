@@ -1,8 +1,8 @@
-# @suggix/widget
+# suggix-widget
 
-[![npm version](https://img.shields.io/npm/v/@suggix/widget.svg)](https://www.npmjs.com/package/@suggix/widget)
+[![npm version](https://img.shields.io/npm/v/suggix-widget.svg)](https://www.npmjs.com/package/suggix-widget)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Bundle Size](https://img.shields.io/bundlephobia/minzip/@suggix/widget)](https://bundlephobia.com/package/@suggix/widget)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/suggix-widget)](https://bundlephobia.com/package/suggix-widget)
 
 The official embeddable feedback, roadmap, and changelog widget for [Suggix](https://suggix.com).
 
@@ -30,7 +30,7 @@ Add the following script before the closing `</body>` tag on any HTML page:
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/@suggix/widget/dist/widget.js"
+  src="https://cdn.jsdelivr.net/npm/suggix-widget/dist/widget.js"
   data-workspace="your-workspace-slug"
   async
 ></script>
@@ -42,7 +42,7 @@ Add the following script before the closing `</body>` tag on any HTML page:
 
 ```html
 <script
-  src="https://cdn.jsdelivr.net/npm/@suggix/widget/dist/widget.js"
+  src="https://cdn.jsdelivr.net/npm/suggix-widget/dist/widget.js"
   data-workspace="acme"
   data-position="bottom-right"
   data-accent-color="#3b82f6"
@@ -58,19 +58,19 @@ Add the following script before the closing `</body>` tag on any HTML page:
 
 ```bash
 # npm
-npm install @suggix/widget
+npm install suggix-widget
 
 # pnpm
-pnpm add @suggix/widget
+pnpm add suggix-widget
 
 # yarn
-yarn add @suggix/widget
+yarn add suggix-widget
 ```
 
 #### Vanilla JS / TypeScript
 
 ```typescript
-import { Suggix } from '@suggix/widget';
+import { Suggix } from 'suggix-widget';
 
 Suggix.init({
   workspace: 'acme',
@@ -83,7 +83,7 @@ Suggix.init({
 
 ```tsx
 import { useEffect } from 'react';
-import { Suggix } from '@suggix/widget';
+import { Suggix } from 'suggix-widget';
 
 export function FeedbackWidget() {
   useEffect(() => {
@@ -106,7 +106,7 @@ export function FeedbackWidget() {
 ```vue
 <script setup>
 import { onMounted, onUnmounted } from 'vue';
-import { Suggix } from '@suggix/widget';
+import { Suggix } from 'suggix-widget';
 
 onMounted(() => {
   Suggix.init({

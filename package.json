@@ -1,5 +1,5 @@
 {
-  "name": "@suggix/widget",
+  "name": "suggix-widget",
   "version": "1.0.0",
   "description": "The official embeddable feedback, roadmap, and changelog widget for Suggix.",
   "main": "./dist/index.js",
@@ -44,9 +44,6 @@
   },
   "bugs": {
     "url": "https://github.com/suggix/widget/issues"
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "devDependencies": {
     "tsup": "^8.3.6",
