@@ -70,6 +70,16 @@ export function getWidgetStyles(config: SuggixConfig): string {
       transform-origin: top left;
     }
 
+    /* When launcher is hidden (hideLauncher: true) */
+    .suggix-no-launcher.pos-bottom-right .suggix-modal,
+    .suggix-no-launcher.pos-bottom-left .suggix-modal {
+      bottom: 0 !important;
+    }
+    .suggix-no-launcher.pos-top-right .suggix-modal,
+    .suggix-no-launcher.pos-top-left .suggix-modal {
+      top: 0 !important;
+    }
+
     /* Floating Launcher Button */
     .suggix-launcher {
       position: relative;
@@ -181,9 +191,9 @@ export function getWidgetStyles(config: SuggixConfig): string {
       opacity: 0;
       visibility: hidden;
       transform: translateY(16px) scale(0.96);
-      transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-                  visibility 0.22s;
+      transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+                  visibility 0.24s;
     }
 
     .suggix-open .suggix-modal {
@@ -193,6 +203,147 @@ export function getWidgetStyles(config: SuggixConfig): string {
       transform: translateY(0) scale(1);
     }
 
+    /* Skeleton Loader Placeholder */
+    .suggix-skeleton-wrapper {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      z-index: 1;
+      opacity: 1;
+      transition: opacity 0.28s ease, visibility 0.28s;
+      pointer-events: none;
+    }
+
+    .suggix-loaded .suggix-skeleton-wrapper {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .suggix-sk-shimmer {
+      background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+      background-size: 200% 100%;
+      animation: suggix-shimmer 1.5s infinite;
+      border-radius: 6px;
+    }
+
+    @keyframes suggix-shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .suggix-sk-header {
+      padding: 20px 20px 16px;
+      background: linear-gradient(180deg, ${accent}18 0%, ${accent}06 60%, #ffffff 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .suggix-sk-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+    }
+
+    .suggix-sk-title {
+      width: 140px;
+      height: 22px;
+      border-radius: 6px;
+    }
+
+    .suggix-sk-sub1 {
+      width: 88%;
+      height: 14px;
+    }
+
+    .suggix-sk-sub2 {
+      width: 65%;
+      height: 14px;
+    }
+
+    .suggix-sk-toolbar {
+      padding: 12px 16px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .suggix-sk-search {
+      width: 100%;
+      height: 38px;
+      border-radius: 8px;
+    }
+
+    .suggix-sk-chips {
+      display: flex;
+      gap: 8px;
+    }
+
+    .suggix-sk-chip {
+      width: 50px;
+      height: 26px;
+      border-radius: 6px;
+    }
+
+    .suggix-sk-cards {
+      padding: 8px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .suggix-sk-card {
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #f1f5f9;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .suggix-sk-vote {
+      width: 42px;
+      height: 48px;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .suggix-sk-lines {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .suggix-sk-line1 {
+      width: 80%;
+      height: 16px;
+    }
+
+    .suggix-sk-line2 {
+      width: 45%;
+      height: 12px;
+    }
+
+    .suggix-sk-bottom {
+      height: 56px;
+      border-top: 1px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 16px;
+    }
+
+    .suggix-sk-nav-item {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+
     /* Iframe Element */
     .suggix-iframe {
       width: 100%;
@@ -200,6 +351,12 @@ export function getWidgetStyles(config: SuggixConfig): string {
       border: none;
       display: block;
       background: transparent;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .suggix-loaded .suggix-iframe {
+      opacity: 1;
     }
 
     /* Mobile Backdrop */

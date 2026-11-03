@@ -48,8 +48,9 @@ export class WidgetContainer {
 
     // 4. Create root wrapper
     const pos = config.position || 'bottom-right';
+    const noLauncherClass = config.hideLauncher ? 'suggix-no-launcher' : '';
     this.rootDiv = document.createElement('div');
-    this.rootDiv.className = `suggix-root pos-${pos}`;
+    this.rootDiv.className = `suggix-root pos-${pos} ${noLauncherClass}`.trim();
     this.shadowRoot.appendChild(this.rootDiv);
 
     // 5. Create mobile backdrop
@@ -63,6 +64,55 @@ export class WidgetContainer {
     this.modalDiv.className = 'suggix-modal';
     this.rootDiv.appendChild(this.modalDiv);
 
+    // 6.1 Create skeleton placeholder
+    const skeletonWrapper = document.createElement('div');
+    skeletonWrapper.className = 'suggix-skeleton-wrapper';
+    skeletonWrapper.innerHTML = `
+      <div class="suggix-sk-header">
+        <div class="suggix-sk-avatar suggix-sk-shimmer"></div>
+        <div class="suggix-sk-title suggix-sk-shimmer"></div>
+        <div class="suggix-sk-sub1 suggix-sk-shimmer"></div>
+        <div class="suggix-sk-sub2 suggix-sk-shimmer"></div>
+      </div>
+      <div class="suggix-sk-toolbar">
+        <div class="suggix-sk-search suggix-sk-shimmer"></div>
+        <div class="suggix-sk-chips">
+          <div class="suggix-sk-chip suggix-sk-shimmer"></div>
+          <div class="suggix-sk-chip suggix-sk-shimmer"></div>
+          <div class="suggix-sk-chip suggix-sk-shimmer"></div>
+        </div>
+      </div>
+      <div class="suggix-sk-cards">
+        <div class="suggix-sk-card">
+          <div class="suggix-sk-vote suggix-sk-shimmer"></div>
+          <div class="suggix-sk-lines">
+            <div class="suggix-sk-line1 suggix-sk-shimmer"></div>
+            <div class="suggix-sk-line2 suggix-sk-shimmer"></div>
+          </div>
+        </div>
+        <div class="suggix-sk-card">
+          <div class="suggix-sk-vote suggix-sk-shimmer"></div>
+          <div class="suggix-sk-lines">
+            <div class="suggix-sk-line1 suggix-sk-shimmer"></div>
+            <div class="suggix-sk-line2 suggix-sk-shimmer"></div>
+          </div>
+        </div>
+        <div class="suggix-sk-card">
+          <div class="suggix-sk-vote suggix-sk-shimmer"></div>
+          <div class="suggix-sk-lines">
+            <div class="suggix-sk-line1 suggix-sk-shimmer"></div>
+            <div class="suggix-sk-line2 suggix-sk-shimmer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="suggix-sk-bottom">
+        <div class="suggix-sk-nav-item suggix-sk-shimmer"></div>
+        <div class="suggix-sk-nav-item suggix-sk-shimmer"></div>
+        <div class="suggix-sk-nav-item suggix-sk-shimmer"></div>
+      </div>
+    `;
+    this.modalDiv.appendChild(skeletonWrapper);
+
     // 7. Create iframe
     this.iframe = document.createElement('iframe');
     this.iframe.className = 'suggix-iframe';
@@ -70,6 +120,11 @@ export class WidgetContainer {
     this.iframe.setAttribute('allow', 'clipboard-write');
     this.iframe.src = this.buildWidgetUrl();
     this.modalDiv.appendChild(this.iframe);
+
+    const markLoaded = () => {
+      this.modalDiv.classList.add('suggix-loaded');
+    };
+    this.iframe.addEventListener('load', markLoaded);
 
     // 8. Create Launcher (unless hideLauncher is true)
     if (!config.hideLauncher) {
@@ -84,6 +139,7 @@ export class WidgetContainer {
           this.close();
           break;
         case 'suggix:ready':
+          markLoaded();
           callbacks.onReady?.();
           break;
         case 'suggix:unread':
@@ -114,6 +170,7 @@ export class WidgetContainer {
 
     const url = new URL(base, window.location.href);
     url.searchParams.set('utm_source', 'widget');
+    url.searchParams.set('embed', 'true');
 
     if (this.config.theme) {
       url.searchParams.set('theme', this.config.theme);
