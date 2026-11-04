@@ -15,6 +15,9 @@ export const identify = Suggix.identify.bind(Suggix);
 export const logout = Suggix.logout.bind(Suggix);
 export const destroy = Suggix.destroy.bind(Suggix);
 export const isOpen = Suggix.isOpen.bind(Suggix);
+export const hideLauncher = Suggix.hideLauncher.bind(Suggix);
+export const showLauncher = Suggix.showLauncher.bind(Suggix);
+export const setLauncherVisible = Suggix.setLauncherVisible.bind(Suggix);
 
 export { Suggix };
 export default Suggix;

@@ -3,6 +3,7 @@ import { SuggixConfig } from '../types';
 export class Launcher {
   public element: HTMLButtonElement;
   public badge: HTMLSpanElement;
+  private isHidden = false;
   private onClickHandler: () => void;
 
   constructor(config: SuggixConfig, onClick: () => void) {
@@ -23,9 +24,8 @@ export class Launcher {
 
     const closeIcon = `
       <div class="suggix-launcher-icon suggix-icon-close">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
         </svg>
       </div>
     `;
@@ -41,6 +41,30 @@ export class Launcher {
       e.stopPropagation();
       this.onClickHandler();
     });
+  }
+
+  public hide(): void {
+    if (this.isHidden) return;
+    this.isHidden = true;
+    this.element.classList.add('suggix-launcher-hidden');
+  }
+
+  public show(): void {
+    if (!this.isHidden) return;
+    this.isHidden = false;
+    this.element.classList.remove('suggix-launcher-hidden');
+  }
+
+  public setVisible(visible: boolean): void {
+    if (visible) {
+      this.show();
+    } else {
+      this.hide();
+    }
+  }
+
+  public getIsHidden(): boolean {
+    return this.isHidden;
   }
 
   public setUnreadCount(count: number): void {

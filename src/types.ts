@@ -71,6 +71,13 @@ export interface SuggixConfig {
   hideLauncher?: boolean;
 
   /**
+   * Automatically hide the floating launcher button when scrolling down,
+   * and show it again when scrolling up.
+   * @default false
+   */
+  autoHideOnScroll?: boolean;
+
+  /**
    * CSS selector for custom elements that should open the widget when clicked.
    * E.g. "#feedback-btn" or "[data-suggix-trigger]"
    */

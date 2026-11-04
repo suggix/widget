@@ -97,6 +97,27 @@ class SuggixClient {
   }
 
   /**
+   * Hide the floating launcher button.
+   */
+  public hideLauncher(): void {
+    this.container?.hideLauncher();
+  }
+
+  /**
+   * Show the floating launcher button.
+   */
+  public showLauncher(): void {
+    this.container?.showLauncher();
+  }
+
+  /**
+   * Set the floating launcher button visibility.
+   */
+  public setLauncherVisible(visible: boolean): void {
+    this.container?.setLauncherVisible(visible);
+  }
+
+  /**
    * Cleanly destroy and remove the widget from DOM.
    */
   public destroy(): void {

@@ -97,8 +97,22 @@ export function getWidgetStyles(config: SuggixConfig): string {
       box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.08);
       pointer-events: auto;
       user-select: none;
-      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, background-color 0.2s ease;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.22s ease,
+                  box-shadow 0.2s ease,
+                  background-color 0.2s ease;
       -webkit-tap-highlight-color: transparent;
+    }
+
+    .suggix-launcher.suggix-launcher-hidden {
+      opacity: 0 !important;
+      transform: translateY(80px) scale(0.65) !important;
+      pointer-events: none !important;
+    }
+
+    .pos-top-right .suggix-launcher.suggix-launcher-hidden,
+    .pos-top-left .suggix-launcher.suggix-launcher-hidden {
+      transform: translateY(-80px) scale(0.65) !important;
     }
 
     .suggix-launcher:hover {
@@ -136,14 +150,15 @@ export function getWidgetStyles(config: SuggixConfig): string {
       display: none;
     }
     .suggix-open .suggix-icon-close {
-      display: block;
-      transform: rotate(90deg);
-      animation: suggix-spin 0.25s ease forwards;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: suggix-slide-down 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    @keyframes suggix-spin {
-      from { transform: rotate(0deg); opacity: 0; }
-      to { transform: rotate(90deg); opacity: 1; }
+    @keyframes suggix-slide-down {
+      from { transform: translateY(-4px) scale(0.85); opacity: 0; }
+      to { transform: translateY(0) scale(1); opacity: 1; }
     }
 
     /* Unread Badge */
@@ -181,6 +196,7 @@ export function getWidgetStyles(config: SuggixConfig): string {
     .suggix-modal {
       position: absolute;
       width: 400px;
+      max-width: calc(100vw - 32px);
       height: 680px;
       max-height: calc(100vh - 100px);
       background-color: #ffffff;
@@ -366,10 +382,45 @@ export function getWidgetStyles(config: SuggixConfig): string {
 
     /* Mobile Responsive Adaptation */
     @media (max-width: 480px) {
-      .suggix-root {
+      .pos-bottom-right {
+        bottom: max(16px, env(safe-area-inset-bottom, 16px));
+        right: max(16px, env(safe-area-inset-right, 16px));
+        left: auto !important;
+        top: auto !important;
+      }
+
+      .pos-bottom-left {
+        bottom: max(16px, env(safe-area-inset-bottom, 16px));
+        left: max(16px, env(safe-area-inset-left, 16px));
+        right: auto !important;
+        top: auto !important;
+      }
+
+      .pos-top-right {
+        top: max(16px, env(safe-area-inset-top, 16px));
+        right: max(16px, env(safe-area-inset-right, 16px));
+        left: auto !important;
+        bottom: auto !important;
+      }
+
+      .pos-top-left {
+        top: max(16px, env(safe-area-inset-top, 16px));
+        left: max(16px, env(safe-area-inset-left, 16px));
+        right: auto !important;
+        bottom: auto !important;
+      }
+
+      .suggix-root.suggix-open {
+        position: fixed !important;
         inset: 0 !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
         width: 100vw !important;
-        height: 100vh !important;
+        height: 100% !important;
+        height: 100dvh !important;
+        pointer-events: none;
       }
 
       .suggix-backdrop {
@@ -397,15 +448,22 @@ export function getWidgetStyles(config: SuggixConfig): string {
         bottom: 0 !important;
         width: 100vw !important;
         height: 100% !important;
+        height: 100dvh !important;
         max-height: 100% !important;
         border-radius: 0 !important;
         box-shadow: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
         transform: translateY(100%) !important;
-        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.24s ease, visibility 0.24s !important;
       }
 
       .suggix-open .suggix-modal {
         transform: translateY(0) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
       }
 
       .suggix-open .suggix-launcher {

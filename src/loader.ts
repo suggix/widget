@@ -31,6 +31,15 @@ function handleCommand(args: IArguments | any[]) {
     case 'destroy':
       Suggix.destroy();
       break;
+    case 'hideLauncher':
+      Suggix.hideLauncher();
+      break;
+    case 'showLauncher':
+      Suggix.showLauncher();
+      break;
+    case 'setLauncherVisible':
+      Suggix.setLauncherVisible(params[0]);
+      break;
     default:
       console.warn(`[Suggix] Unknown method: "${method}"`);
   }
@@ -51,6 +60,9 @@ SuggixWrapper.identify = Suggix.identify.bind(Suggix);
 SuggixWrapper.logout = Suggix.logout.bind(Suggix);
 SuggixWrapper.switchTab = Suggix.switchTab.bind(Suggix);
 SuggixWrapper.destroy = Suggix.destroy.bind(Suggix);
+SuggixWrapper.hideLauncher = Suggix.hideLauncher.bind(Suggix);
+SuggixWrapper.showLauncher = Suggix.showLauncher.bind(Suggix);
+SuggixWrapper.setLauncherVisible = Suggix.setLauncherVisible.bind(Suggix);
 
 // Flush existing queued calls if user pre-defined window.Suggix.q
 if (typeof window !== 'undefined') {

@@ -15,6 +15,8 @@ export class WidgetContainer {
   private messenger: Messenger;
   private isModalOpen = false;
   private keydownListener: (e: KeyboardEvent) => void;
+  private scrollListener: ((e: Event) => void) | null = null;
+  private popstateListener: (() => void) | null = null;
   private triggerElements: Element[] = [];
 
   constructor(
@@ -161,6 +163,93 @@ export class WidgetContainer {
     if (config.trigger) {
       this.bindTriggers(config.trigger);
     }
+
+    // 12. Auto-hide launcher on scroll if enabled
+    if (config.autoHideOnScroll && !config.hideLauncher) {
+      this.initScrollListener();
+    }
+  }
+
+  private initScrollListener(): void {
+    const lastScrollTops = new WeakMap<EventTarget, number>();
+    let accumulatedDelta = 0;
+    let lastTargetTop = 0;
+    let ticking = false;
+
+    this.scrollListener = (event: Event) => {
+      // Never hide or change launcher visibility when modal is open
+      if (this.isModalOpen) return;
+
+      const target = event.target as HTMLElement | Document;
+      if (!target) return;
+
+      let currentTop = 0;
+      if (target === document || target === window) {
+        currentTop = window.scrollY || document.documentElement.scrollTop || 0;
+      } else if ('scrollTop' in target) {
+        currentTop = (target as HTMLElement).scrollTop;
+      } else {
+        return;
+      }
+
+      const prevTop = lastScrollTops.get(target) ?? currentTop;
+      const delta = currentTop - prevTop;
+      lastScrollTops.set(target, currentTop);
+
+      accumulatedDelta += delta;
+      lastTargetTop = currentTop;
+
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (this.isModalOpen) {
+            accumulatedDelta = 0;
+            ticking = false;
+            return;
+          }
+
+          // Near top: always restore launcher visibility
+          if (lastTargetTop <= 30) {
+            this.showLauncher();
+          } else if (accumulatedDelta > 10 && lastTargetTop > 60) {
+            // Scrolling down -> hide launcher
+            this.hideLauncher();
+          } else if (accumulatedDelta < -10) {
+            // Scrolling up -> show launcher
+            this.showLauncher();
+          }
+
+          accumulatedDelta = 0;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    // Use capture phase to catch scroll events from any nested scroll container
+    window.addEventListener('scroll', this.scrollListener, { capture: true, passive: true });
+
+    // Show launcher again when browser navigation / URL change occurs
+    this.popstateListener = () => {
+      this.showLauncher();
+    };
+    window.addEventListener('popstate', this.popstateListener);
+  }
+
+  public hideLauncher(): void {
+    if (this.isModalOpen) return;
+    this.launcher?.hide();
+  }
+
+  public showLauncher(): void {
+    this.launcher?.show();
+  }
+
+  public setLauncherVisible(visible: boolean): void {
+    if (visible) {
+      this.showLauncher();
+    } else {
+      this.hideLauncher();
+    }
   }
 
   private buildWidgetUrl(): string {
@@ -210,6 +299,7 @@ export class WidgetContainer {
     }
 
     this.isModalOpen = true;
+    this.showLauncher(); // Ensure launcher is visible so close button displays
     this.rootDiv.classList.add('suggix-open');
     this.messenger.sendOpen(tab);
     this.config.onOpen?.();
@@ -220,6 +310,7 @@ export class WidgetContainer {
 
     this.isModalOpen = false;
     this.rootDiv.classList.remove('suggix-open');
+    this.showLauncher(); // Restore launcher on close
     this.messenger.sendClose();
     this.config.onClose?.();
   }
@@ -245,6 +336,14 @@ export class WidgetContainer {
   }
 
   public destroy(): void {
+    if (this.scrollListener) {
+      window.removeEventListener('scroll', this.scrollListener, { capture: true });
+      this.scrollListener = null;
+    }
+    if (this.popstateListener) {
+      window.removeEventListener('popstate', this.popstateListener);
+      this.popstateListener = null;
+    }
     window.removeEventListener('keydown', this.keydownListener);
     this.messenger.destroy();
     this.launcher?.destroy();
