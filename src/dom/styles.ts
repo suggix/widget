@@ -1,7 +1,9 @@
 import { SuggixConfig } from '../types';
 
+export const DEFAULT_BRAND_COLOR = '#5061bb';
+
 export function getWidgetStyles(config: SuggixConfig): string {
-  const accent = config.accentColor || '#3b82f6';
+  const accent = DEFAULT_BRAND_COLOR;
   const zIndex = config.zIndex ?? 999999;
   const offsetX = config.offset?.x ?? 20;
   const offsetY = config.offset?.y ?? 20;

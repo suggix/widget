@@ -46,12 +46,6 @@ export interface SuggixConfig {
   zIndex?: number;
 
   /**
-   * Accent color of the launcher button.
-   * If not specified, uses the workspace primary color or #3b82f6.
-   */
-  accentColor?: string;
-
-  /**
    * Theme mode: 'light', 'dark', or 'auto' (system preference).
    * @default 'auto'
    */

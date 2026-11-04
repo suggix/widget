@@ -45,7 +45,6 @@ Add the following script before the closing `</body>` tag on any HTML page:
   src="https://cdn.jsdelivr.net/npm/suggix-widget/dist/widget.js"
   data-workspace="acme"
   data-position="bottom-right"
-  data-accent-color="#3b82f6"
   data-default-tab="feedback"
   data-theme="auto"
   async
@@ -75,7 +74,6 @@ import { Suggix } from 'suggix-widget';
 Suggix.init({
   workspace: 'acme',
   position: 'bottom-right',
-  accentColor: '#3b82f6',
 });
 ```
 
@@ -195,7 +193,6 @@ Completely unmounts and removes the widget from the DOM.
 | `position` | `'bottom-right' \| 'bottom-left' \| 'top-right' \| 'top-left'` | `'bottom-right'` | Position of the launcher button and modal. |
 | `offset` | `{ x?: number; y?: number }` | `{ x: 20, y: 20 }` | Pixel offset from screen edges. |
 | `zIndex` | `number` | `999999` | Z-index of the widget container. |
-| `accentColor` | `string` | Workspace color or `#3b82f6` | Background color of the floating launcher button. |
 | `theme` | `'light' \| 'dark' \| 'auto'` | `'auto'` | Color theme. `'auto'` respects user OS preference. |
 | `defaultTab` | `'feedback' \| 'create' \| 'changelog'` | `'feedback'` | Tab to display when the widget opens. |
 | `hideLauncher` | `boolean` | `false` | If `true`, hides the default floating button. |

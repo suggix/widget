@@ -188,7 +188,7 @@ export class WidgetContainer {
       // Never hide or change launcher visibility when modal is open
       if (this.isModalOpen) return;
 
-      const target = event.target as HTMLElement | Document;
+      const target = event.target as HTMLElement | Document | Window;
       if (!target) return;
 
       let currentTop = 0;
@@ -262,7 +262,6 @@ export class WidgetContainer {
 
   public setAccentColor(color: string): void {
     if (!color) return;
-    this.config.accentColor = color;
     this.launcher?.setAccentColor(color);
   }
 

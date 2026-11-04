@@ -109,7 +109,6 @@ function autoInitFromScriptTag(): void {
     workspace,
     baseUrl: script.getAttribute('data-base-url') || undefined,
     position: (script.getAttribute('data-position') as WidgetPosition) || undefined,
-    accentColor: script.getAttribute('data-accent-color') || undefined,
     theme: (script.getAttribute('data-theme') as WidgetTheme) || undefined,
     defaultTab: (script.getAttribute('data-default-tab') as WidgetTab) || undefined,
     hideLauncher: script.getAttribute('data-hide-launcher') === 'true',

@@ -122,9 +122,6 @@ class SuggixClient {
    */
   public setAccentColor(color: string): void {
     if (!color) return;
-    if (this.config) {
-      this.config.accentColor = color;
-    }
     this.container?.setAccentColor(color);
   }
 

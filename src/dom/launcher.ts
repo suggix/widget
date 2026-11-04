@@ -38,10 +38,6 @@ export class Launcher {
     this.element.innerHTML = `${defaultIcon}${closeIcon}`;
     this.element.appendChild(this.badge);
 
-    if (config.accentColor) {
-      this.setAccentColor(config.accentColor);
-    }
-
     this.element.addEventListener('click', (e) => {
       e.stopPropagation();
       this.onClickHandler();
