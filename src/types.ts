@@ -111,7 +111,8 @@ export interface SuggixConfig {
 
 export type ChildToParentMessage =
   | { type: 'suggix:close' }
-  | { type: 'suggix:ready' }
+  | { type: 'suggix:ready'; brandColor?: string; workspaceName?: string }
+  | { type: 'suggix:theme'; brandColor?: string }
   | { type: 'suggix:unread'; count: number }
   | { type: 'suggix:resize'; height?: number; width?: number };
 

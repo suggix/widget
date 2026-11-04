@@ -142,7 +142,15 @@ export class WidgetContainer {
           break;
         case 'suggix:ready':
           markLoaded();
+          if (msg.brandColor) {
+            this.setAccentColor(msg.brandColor);
+          }
           callbacks.onReady?.();
+          break;
+        case 'suggix:theme':
+          if (msg.brandColor) {
+            this.setAccentColor(msg.brandColor);
+          }
           break;
         case 'suggix:unread':
           this.launcher?.setUnreadCount(msg.count);
@@ -250,6 +258,12 @@ export class WidgetContainer {
     } else {
       this.hideLauncher();
     }
+  }
+
+  public setAccentColor(color: string): void {
+    if (!color) return;
+    this.config.accentColor = color;
+    this.launcher?.setAccentColor(color);
   }
 
   private buildWidgetUrl(): string {

@@ -18,6 +18,8 @@ export const isOpen = Suggix.isOpen.bind(Suggix);
 export const hideLauncher = Suggix.hideLauncher.bind(Suggix);
 export const showLauncher = Suggix.showLauncher.bind(Suggix);
 export const setLauncherVisible = Suggix.setLauncherVisible.bind(Suggix);
+export const setAccentColor = Suggix.setAccentColor.bind(Suggix);
+export const setColor = Suggix.setColor.bind(Suggix);
 
 export { Suggix };
 export default Suggix;

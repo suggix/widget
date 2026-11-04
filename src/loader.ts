@@ -40,6 +40,10 @@ function handleCommand(args: IArguments | any[]) {
     case 'setLauncherVisible':
       Suggix.setLauncherVisible(params[0]);
       break;
+    case 'setAccentColor':
+    case 'setColor':
+      Suggix.setAccentColor(params[0]);
+      break;
     default:
       console.warn(`[Suggix] Unknown method: "${method}"`);
   }
@@ -63,6 +67,8 @@ SuggixWrapper.destroy = Suggix.destroy.bind(Suggix);
 SuggixWrapper.hideLauncher = Suggix.hideLauncher.bind(Suggix);
 SuggixWrapper.showLauncher = Suggix.showLauncher.bind(Suggix);
 SuggixWrapper.setLauncherVisible = Suggix.setLauncherVisible.bind(Suggix);
+SuggixWrapper.setAccentColor = Suggix.setAccentColor.bind(Suggix);
+SuggixWrapper.setColor = Suggix.setColor.bind(Suggix);
 
 // Flush existing queued calls if user pre-defined window.Suggix.q
 if (typeof window !== 'undefined') {

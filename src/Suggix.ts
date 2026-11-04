@@ -118,6 +118,24 @@ class SuggixClient {
   }
 
   /**
+   * Dynamically update the launcher accent / brand color.
+   */
+  public setAccentColor(color: string): void {
+    if (!color) return;
+    if (this.config) {
+      this.config.accentColor = color;
+    }
+    this.container?.setAccentColor(color);
+  }
+
+  /**
+   * Alias for setAccentColor.
+   */
+  public setColor(color: string): void {
+    this.setAccentColor(color);
+  }
+
+  /**
    * Cleanly destroy and remove the widget from DOM.
    */
   public destroy(): void {

@@ -83,10 +83,10 @@ export function getWidgetStyles(config: SuggixConfig): string {
     /* Floating Launcher Button */
     .suggix-launcher {
       position: relative;
-      width: 56px;
-      height: 56px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
-      background-color: ${accent};
+      background-color: var(--suggix-accent, ${accent});
       color: #ffffff;
       border: none;
       outline: none;
@@ -94,13 +94,13 @@ export function getWidgetStyles(config: SuggixConfig): string {
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 24px var(--suggix-shadow, ${accent}60), 0 2px 6px rgba(0, 0, 0, 0.08);
       pointer-events: auto;
       user-select: none;
       transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
                   opacity 0.22s ease,
-                  box-shadow 0.2s ease,
-                  background-color 0.2s ease;
+                  box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  background-color 0.25s ease;
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -117,7 +117,7 @@ export function getWidgetStyles(config: SuggixConfig): string {
 
     .suggix-launcher:hover {
       transform: scale(1.06);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24), 0 3px 8px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 10px 28px var(--suggix-shadow-hover, ${accent}75), 0 3px 8px rgba(0, 0, 0, 0.12);
     }
 
     .suggix-launcher:active {
@@ -125,8 +125,8 @@ export function getWidgetStyles(config: SuggixConfig): string {
     }
 
     .suggix-launcher-icon {
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -134,9 +134,18 @@ export function getWidgetStyles(config: SuggixConfig): string {
     }
 
     .suggix-launcher-icon svg {
+      display: block;
+      fill: currentColor;
+    }
+
+    .suggix-icon-default svg {
       width: 26px;
       height: 26px;
-      fill: currentColor;
+    }
+
+    .suggix-icon-close svg {
+      width: 30px;
+      height: 30px;
     }
 
     .suggix-icon-default {

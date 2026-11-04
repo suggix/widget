@@ -16,16 +16,16 @@ export class Launcher {
 
     const defaultIcon = `
       <div class="suggix-launcher-icon suggix-icon-default">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+        <svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26">
+          <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2m0 14H6l-2 2V4h16z"/>
         </svg>
       </div>
     `;
 
     const closeIcon = `
       <div class="suggix-launcher-icon suggix-icon-close">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="6 9 12 15 18 9"></polyline>
+        <svg viewBox="0 0 24 24" fill="currentColor" width="30" height="30">
+          <path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/>
         </svg>
       </div>
     `;
@@ -36,6 +36,10 @@ export class Launcher {
 
     this.element.innerHTML = `${defaultIcon}${closeIcon}`;
     this.element.appendChild(this.badge);
+
+    if (config.accentColor) {
+      this.setAccentColor(config.accentColor);
+    }
 
     this.element.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -65,6 +69,13 @@ export class Launcher {
 
   public getIsHidden(): boolean {
     return this.isHidden;
+  }
+
+  public setAccentColor(color: string): void {
+    if (!color) return;
+    this.element.style.setProperty('--suggix-accent', color);
+    this.element.style.setProperty('--suggix-shadow', `${color}60`);
+    this.element.style.setProperty('--suggix-shadow-hover', `${color}75`);
   }
 
   public setUnreadCount(count: number): void {
