@@ -85,11 +85,15 @@ export function getWidgetStyles(config: SuggixConfig): string {
       position: relative;
       width: 58px;
       height: 58px;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: 0 !important;
+      outline: none !important;
+      line-height: 0 !important;
+      box-sizing: border-box !important;
       border-radius: 50%;
       background-color: var(--suggix-accent, ${accent});
       color: #ffffff;
-      border: none;
-      outline: none;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -125,49 +129,50 @@ export function getWidgetStyles(config: SuggixConfig): string {
     }
 
     .suggix-launcher-icon {
-      width: 32px;
-      height: 32px;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.25s ease, opacity 0.25s ease;
+      pointer-events: none;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease;
     }
 
     .suggix-launcher-icon svg {
       display: block;
-      fill: currentColor;
+    }
+
+    .suggix-icon-default {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
     }
 
     .suggix-icon-default svg {
       width: 26px;
       height: 26px;
+      fill: currentColor;
+    }
+
+    .suggix-icon-close {
+      opacity: 0;
+      transform: rotate(-90deg) scale(0.7);
     }
 
     .suggix-icon-close svg {
-      width: 30px;
-      height: 30px;
-    }
-
-    .suggix-icon-default {
-      display: block;
-    }
-    .suggix-icon-close {
-      display: none;
+      width: 24px;
+      height: 24px;
     }
 
     .suggix-open .suggix-icon-default {
-      display: none;
-    }
-    .suggix-open .suggix-icon-close {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: suggix-slide-down 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+      transform: rotate(90deg) scale(0.7);
     }
 
-    @keyframes suggix-slide-down {
-      from { transform: translateY(-4px) scale(0.85); opacity: 0; }
-      to { transform: translateY(0) scale(1); opacity: 1; }
+    .suggix-open .suggix-icon-close {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
     }
 
     /* Unread Badge */
