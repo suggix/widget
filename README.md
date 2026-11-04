@@ -6,6 +6,8 @@
 
 The official embeddable feedback, roadmap, and changelog widget for [Suggix](https://suggix.com).
 
+[Website](https://suggix.com) • [Documentation](https://docs.suggix.com/guides/widgets) • [Live Feedback Portal](https://feedback.suggix.com) • [GitHub](https://github.com/suggix/widget)
+
 Collect customer feedback, announce product updates, and share roadmaps directly inside your SaaS web application with a single `<script>` tag or via the JavaScript/TypeScript SDK.
 
 ---
@@ -16,7 +18,7 @@ Collect customer feedback, announce product updates, and share roadmaps directly
 - **🛡️ 100% Style Isolation**: Built with Shadow DOM — immune to host website CSS resets (Bootstrap, Tailwind, etc.).
 - **📱 Fully Responsive**: Floating card on desktop, adaptive bottom drawer on mobile devices.
 - **🔄 Bidirectional `postMessage` Communication**: Real-time events, smooth close button handling, unread changelog badges.
-- **🎨 Custom Branding**: Customize accent colors, positions (`bottom-right`, `bottom-left`), launcher icons, and themes.
+- **🎨 Custom Branding**: Automatically synchronizes with your workspace brand color, customizable positions (`bottom-right`, `bottom-left`), and themes.
 - **🔑 SSO Authentication**: Seamlessly identify logged-in users and pass secure SSO tokens.
 - **📦 Dual Distribution**: Use via CDN `<script>` tag or install via NPM for React, Vue, Next.js, and Angular.
 
@@ -239,6 +241,15 @@ npm run dev
 # Open test playground in browser
 open index.html
 ```
+
+---
+
+## 🔗 Useful Links & Resources
+
+- 🌐 **[Suggix Official Website](https://suggix.com)**: Modern customer feedback, feature requests, and product roadmap software.
+- 📚 **[Widget Documentation & Guides](https://docs.suggix.com/guides/widgets)**: Integration tutorials for React, Next.js, Vue, Nuxt, and HTML.
+- 🚀 **[Live Feedback Portal](https://feedback.suggix.com)**: Submit suggestions, vote on roadmap items, and see updates in real time.
+- 🐛 **[GitHub Repository & Issues](https://github.com/suggix/widget)**: View source code, submit feedback, or report widget bugs.
 
 ---
 

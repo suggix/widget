@@ -32,12 +32,23 @@
     "feature-requests",
     "customer-feedback",
     "roadmap",
+    "product-management",
+    "user-feedback",
+    "customer-portal",
     "embed",
     "sdk"
   ],
-  "author": "Suggix <support@suggix.com>",
+  "author": {
+    "name": "Suggix",
+    "email": "support@suggix.com",
+    "url": "https://suggix.com"
+  },
   "license": "MIT",
   "homepage": "https://suggix.com",
+  "funding": {
+    "type": "website",
+    "url": "https://suggix.com"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/suggix/widget.git"
